@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<main>
+
+  <button><a href='http://www.giphy.com/search/mercury'>Mercury</a></button>
+
+  <button><a href='http://www.giphy.com/search/earth'>Earth</a></button>
+
+  <button><a href='http://www.giphy.com/search/mars'>Mars</a></button>
+
+  <button><a href='http://www.giphy.com/search/jupiter'>Jupiter</a></button>
+
+  <button><a href='http://www.giphy.com/search/saturn'>Saturn</a></button>
+
+  <button><a href='http://www.giphy.com/search/uranus'>Uranus</a></button>
+
+  <button><a href='http://www.giphy.com/search/neptune'>Neptune</a></button>
+</main>
+
+  <form action='/' method='post'>
+    <input type="text" name="search_term" placeholder='Search' value="">
+    <button type="submit" name="button">Submit</button>
+  </form>
+  <div class="user-buttons">
+    {{#buttons}}
+
+
+    <button type="button" name="button" value='{{search_term}}' a href='http://www.giphy.com/search/{{search_term}}'></button>
+
+    <form class="" action="/buttons/{{_id}}/delete" method="post">
+      <input type="submit" value = "Delete">
+    </form>
+
+    {{/buttons}}
+  </div>
+</body>
+</html>
