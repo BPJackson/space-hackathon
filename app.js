@@ -1,8 +1,9 @@
+require('dotenv').load()
+
 var http = require('http');
 var url = require('url');
 var router = require('./router');
 var NodeSession = require('node-session');
-require('dotenv').load()
 var session = new NodeSession({secret: process.env.SECRET});
 
 
