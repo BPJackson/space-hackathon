@@ -2,14 +2,15 @@ var routes = require('routes')(),
   fs = require('fs'),
   view = require('mustache'),
   mime = require('mime'),
-  db = require('monk')('localhost/spaceHackathon'),
-  buttons = db.get('buttons'),
+  db = require('monk')('localhost/space'),
+  buttons = db.get('button'),
+  newsearch = db.get('newsearch'),
   users = db.get('users'),
   qs = require('qs'),
   view = require('./view');
 
 
-routes.addRoute('/', (req, res, url) => {
+routes.addRoute('/homepage', (req, res, url) => {
   if (req.method === 'GET') {
     res.setHeader('Content-Type', 'text/html');
     buttons.find({}, function(err, docs) {
@@ -30,7 +31,7 @@ routes.addRoute('/', (req, res, url) => {
       buttons.insert(button, function(err, doc) {
         if (err) res.end('whoops from index-post route');
         res.writeHead(302, {
-          'Location': '/'
+          'Location': '/homepage'
         });
         res.end();
       });
@@ -45,12 +46,85 @@ routes.addRoute('/buttons/:id/delete', (req, res, url) => {
     }, function(err, doc) {
       if (err) console.log(err);
       res.writeHead(302, {
-        'Location': '/'
+        'Location': '/homepage'
       });
       res.end();
     });
   }
 });
+routes.addRoute('/register', (req, res, url) => {
+  if (req.method === 'GET') {
+    res.setHeader('Content-Type', 'text/html')
+    var template = view.render('sessions/register',  {title: 'Log In'})
+    res.end(template)
+  }
+  if (req.method === 'POST') {
+    var data = ''
+
+    req.on('data', function (chunk) {
+      data += chunk
+    })
+
+    req.on('end', function () {
+      console.log('we are going to insert a user into the db!')
+      var user = qs.parse(data)
+      users.insert(user, function(err, doc) {
+        if (err) {
+          res.writeHead(302, {'Location': '/register'})
+          res.end()
+          return
+        }
+        req.session.put('email', doc.email)
+        res.writeHead(302, {'Location': '/homepage'})
+        res.end()
+      })
+    })
+  }
+})
+
+routes.addRoute('/', (req, res, url) => {
+  if (req.method === 'GET') {
+    var template = view.render('sessions/login', {})
+    res.end(template)
+  }
+  if (req.method === 'POST') {
+    var data = ''
+
+    req.on('data', function (chunk) {
+      data += chunk
+    })
+    req.on('end', function () {
+      var user = qs.parse(data)
+      console.log(user)
+      users.findOne({email: user.email}, function(err, doc) {
+        if (err) {
+          res.writeHead(302, {'Location': '/register'})
+          res.end()
+        }
+        console.log('checking doc')
+
+        if (doc && user.password === doc.password) {
+
+        console.log(doc)
+        req.session.put('email', doc.email)
+        res.writeHead(302, {'Location': '/homepage'})
+        res.end()
+        }
+        else {
+          console.log('passwords didnt match')
+          res.writeHead(302, {'Location':'/'})
+          res.end()
+        }
+  })
+})
+}})
+routes.addRoute('/logout', (req, res, url) => {
+  req.session.flush()
+  res.writeHead(302, {'Location': '/'})
+  res.end()
+
+})
+
 
 routes.addRoute('/public/*', (req, res, url) => {
   res.setHeader('Content-Type', mime.lookup(req.url));

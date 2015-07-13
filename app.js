@@ -1,6 +1,8 @@
 var http = require('http');
 var url = require('url');
 var router = require('./router');
+var NodeSession = require('node-session');
+var session = new NodeSession({secret: 'Q3UBzdH9GEfiRCTKbi5MTPyChpzXLsTD'});
 
 var server = http.createServer (function (req, res) {
   if (req.url === '/favicon.ico'){
@@ -10,7 +12,13 @@ var server = http.createServer (function (req, res) {
   }
   var path = url.parse (req.url).pathname;
   var currentRoute = router.match(path);
-  currentRoute.fn(req, res, currentRoute);
+  if (currentRoute) {
+    session.startSession(req, res, function() {
+    currentRoute.fn(req, res, currentRoute);
+  })}
+  else {
+    res.end('404')
+  }
 });
 
 server.listen(7890, function (err) {

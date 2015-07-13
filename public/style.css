@@ -1,24 +1,62 @@
 * {
   box-sizing: border-box;
-  background: url('space.gif') no-repeat center center fixed;
+  background: url('http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/05/rainbow-nebula.jpg') no-repeat center center fixed;
   background-size: cover;
-  font-family: sans-serif;
+  font-family: 'Gill Sans', sans-serif;
   font-weight: 100;
+  margin-left:auto;
+  margin-right:auto;
+  color:white;
+  font-size:20px;
 }
 body {
-display: inline-block;
+
+width: 100%;
+margin-left:auto;
+margin-right:auto;
+text-align:center;
 }
-main {
-  width: 80%;
-  box-shadow: 3px 3px 5px 6px white;
+nav {
+  list-style-type:none;
+  border:1px solid white;
+  width:200px;
+  margin:10px;
+  padding:20px;
+}
+.nav a {
+  margin:10px 20px;
+  float:left;
+}
+h1 {
+  font-size:40px;
 }
 button, input {
   text-decoration: none;
-  border: 1px solid gray;
+  border: 1px solid white;
   padding: 10px;
-  background: none;
   color: white;
-  width: 80px;
-  height: 50px;
-  margin: 10px;
+  width: 200px;
+  height: 80px;
+  margin:10px;
+}
+.delete {
+  width:100px;
+  height:40px;
+}
+main {
+  width:80%;
+}
+form {
+  width:200px;
+}
+.planet {
+  height:200px;
+  width:200px;
+  border-radius:30000000000000px;
+  background: #111;
+  color:white;
+}
+.planet a {
+  background: #111;
+  text-decoration: none;
 }

@@ -6,38 +6,44 @@
   <title>Document</title>
 </head>
 <body>
+  <nav>
+    <a href="/logout">Log Out</a>
+  </nav>
 <main>
+<div class="container">
+<h1>Space Gifs Assemble!</h1>
+  <button class="planet"><a href='http://www.giphy.com/search/mercury'>Mercury</a></button>
 
-  <button><a href='http://www.giphy.com/search/mercury'>Mercury</a></button>
+  <button class="planet"><a href='http://www.giphy.com/search/earth'>Earth</a></button>
 
-  <button><a href='http://www.giphy.com/search/earth'>Earth</a></button>
+  <button class="planet"><a href='http://www.giphy.com/search/mars'>Mars</a></button>
 
-  <button><a href='http://www.giphy.com/search/mars'>Mars</a></button>
+  <button class="planet"><a href='http://www.giphy.com/search/jupiter'>Jupiter</a></button>
 
-  <button><a href='http://www.giphy.com/search/jupiter'>Jupiter</a></button>
+  <button class="planet"><a href='http://www.giphy.com/search/saturn'>Saturn</a></button>
 
-  <button><a href='http://www.giphy.com/search/saturn'>Saturn</a></button>
+  <button class="planet"><a href='http://www.giphy.com/search/uranus'>Uranus</a></button>
 
-  <button><a href='http://www.giphy.com/search/uranus'>Uranus</a></button>
+  <button class="planet"><a href='http://www.giphy.com/search/neptune'>Neptune</a></button>
 
-  <button><a href='http://www.giphy.com/search/neptune'>Neptune</a></button>
-</main>
-
-  <form action='/' method='post'>
-    <input type="text" name="search_term" placeholder='Search' value="">
+  <form action='/homepage' method='post'>
+    <input class="newbutton" type="text" name="search_term" placeholder='Search' value="">
     <button type="submit" name="button">Submit</button>
   </form>
   <div class="user-buttons">
     {{#buttons}}
 
-
-    <button type="button" name="button" value='{{search_term}}' a href='http://www.giphy.com/search/{{search_term}}'></button>
-
-    <form class="" action="/buttons/{{_id}}/delete" method="post">
-      <input type="submit" value = "Delete">
+<div>
+  <form action="/search" method="get">
+    <button><a type="button user-button" class="newbutton" name="button" href="http://www.giphy.com/search/{{search_term}}" value='{{search_term}}'>{{search_term}}</a></button>
     </form>
-
+    <form class="" action="/buttons/{{_id}}/delete" method="post">
+      <input class="delete" type="submit" value = "Delete">
+    </form>
+</div>
     {{/buttons}}
   </div>
+  </main>
+</div>
 </body>
 </html>
