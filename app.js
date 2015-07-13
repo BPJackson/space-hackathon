@@ -24,7 +24,7 @@ var server = http.createServer (function (req, res) {
   }
 });
 
-server.listen(7890, function (err) {
+server.listen(process.env.PORT || 5000, function (err) {
   if (err) console.log('shit is broken');
   console.log('Spun and run on 7890');
 });
