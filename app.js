@@ -2,7 +2,9 @@ var http = require('http');
 var url = require('url');
 var router = require('./router');
 var NodeSession = require('node-session');
-var session = new NodeSession({secret: 'Q3UBzdH9GEfiRCTKbi5MTPyChpzXLsTD'});
+require('dotenv').load()
+var session = new NodeSession({secret: process.env.SECRET});
+
 
 var server = http.createServer (function (req, res) {
   if (req.url === '/favicon.ico'){
@@ -23,5 +25,5 @@ var server = http.createServer (function (req, res) {
 
 server.listen(7890, function (err) {
   if (err) console.log('shit is broken');
-  console.log('Shit is tight on 7890');
+  console.log('Spun and run on 7890');
 });

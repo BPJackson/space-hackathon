@@ -1,13 +1,15 @@
+require('dotenv').load();
 var routes = require('routes')(),
   fs = require('fs'),
   view = require('mustache'),
   mime = require('mime'),
-  db = require('monk')('localhost/space'),
+  db = require('monk')(process.env.MONGOLAB_URI),
   buttons = db.get('button'),
   newsearch = db.get('newsearch'),
   users = db.get('users'),
   qs = require('qs'),
   view = require('./view');
+
 
 
 routes.addRoute('/homepage', (req, res, url) => {

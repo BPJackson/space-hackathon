@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --harmony app.js"
+    "start": "node --harmony app.js",
+    "dev": "nodemon --harmony app.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/aetweedie/space-hackathon",
   "dependencies": {
+    "dotenv": "^1.2.0",
     "mime": "^1.3.4",
     "monk": "^1.0.1",
     "mustache": "^2.1.2",
