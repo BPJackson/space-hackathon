@@ -103,11 +103,7 @@ routes.addRoute('/', (req, res, url) => {
           res.writeHead(302, {'Location': '/register'})
           res.end()
         }
-        console.log('checking doc')
-
         if (doc && user.password === doc.password) {
-
-        console.log(doc)
         req.session.put('email', doc.email)
         res.writeHead(302, {'Location': '/homepage'})
         res.end()
